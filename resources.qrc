@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/pictures">
+        <file>blueprint.png</file>
+        <file>Pointy.png</file>
+        <file>Pointy2.png</file>
+        <file>Pointy3.png</file>
+    </qresource>
+</RCC>
