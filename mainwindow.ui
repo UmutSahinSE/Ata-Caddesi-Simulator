@@ -54,7 +54,7 @@
        <widget class="QWidget" name="BuildScroll">
         <property name="geometry">
          <rect>
-          <x>-300</x>
+          <x>0</x>
           <y>0</y>
           <width>5000</width>
           <height>5000</height>
@@ -66,7 +66,10 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <widget class="QLabel" name="buildLabel">
+        <property name="mouseTracking">
+         <bool>true</bool>
+        </property>
+        <widget class="MyLabel" name="buildLabel">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -87,8 +90,21 @@
            <height>16777215</height>
           </size>
          </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+         <property name="mouseTracking">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="buildimage">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>5000</width>
+           <height>5000</height>
+          </rect>
+         </property>
+         <property name="mouseTracking">
+          <bool>true</bool>
          </property>
          <property name="text">
           <string/>
@@ -98,9 +114,6 @@
          </property>
          <property name="scaledContents">
           <bool>true</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
        </widget>
@@ -129,6 +142,13 @@
       </widget>
      </widget>
     </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="ChooseButton">
+      <property name="text">
+       <string>Choose</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
      <spacer name="horizontalSpacer">
       <property name="orientation">
@@ -142,20 +162,6 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="SimulateButton">
-      <property name="text">
-       <string>Simulate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
-     <widget class="QPushButton" name="ChooseButton">
-      <property name="text">
-       <string>Choose</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="3">
      <spacer name="horizontalSpacer_2">
       <property name="orientation">
@@ -168,6 +174,13 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="SimulateButton">
+      <property name="text">
+       <string>Simulate</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -288,6 +301,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">mylabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     trafficlightoptions.cpp \
     caroption.cpp \
     mainwindow.cpp \
-    zebracrossingoptions.cpp
+    zebracrossingoptions.cpp \
+    mylabel.cpp
 
 HEADERS  += \
     endoftheroadoptions.h \
@@ -43,7 +44,9 @@ HEADERS  += \
     trafficlightoptions.h \
     caroption.h \
     mainwindow.h \
-    zebracrossingoptions.h
+    zebracrossingoptions.h \
+    onewayroad.h \
+    mylabel.h
 
 FORMS    += \
     endoftheroadoptions.ui \
