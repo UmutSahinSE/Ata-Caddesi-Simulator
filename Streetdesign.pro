@@ -28,7 +28,6 @@ SOURCES += main.cpp\
     intersectionoptions.cpp \
     roadoptions.cpp \
     signoptions.cpp \
-    simulation_screen.cpp \
     trafficlightoptions.cpp \
     caroption.cpp \
     mainwindow.cpp \
@@ -40,7 +39,6 @@ HEADERS  += \
     intersectionoptions.h \
     roadoptions.h \
     signoptions.h \
-    simulation_screen.h \
     trafficlightoptions.h \
     caroption.h \
     mainwindow.h \
@@ -53,7 +51,6 @@ FORMS    += \
     intersectionoptions.ui \
     roadoptions.ui \
     signoptions.ui \
-    simulationscreen.ui \
     trafficlightoptions.ui \
     caroption.ui \
     mainwindow.ui \

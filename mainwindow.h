@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    OneWayRoadClass *roads= new OneWayRoadClass[50];
+
 
 };
 

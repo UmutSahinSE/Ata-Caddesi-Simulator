@@ -14,8 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QBitmap nmap(":/pictures/One Way Road.png");
 //    QCursor ncursor(nmap);
 //    ui->BuildScreen->setCursor(ncursor);
-
     ui->setupUi(this);
+    resize(1500,800);
+
 
 
 
@@ -38,6 +39,7 @@ void MainWindow::on_actionOne_Way_triggered()
     //add one way road
     connect(ui->buildLabel, SIGNAL(MousePos()),this, SLOT(ChooseAddPosition()));
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
+
 }
 
 
