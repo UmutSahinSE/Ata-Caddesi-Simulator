@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <onewayroad.h>
 
 namespace Ui {
 class MainWindow;
@@ -13,15 +14,21 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+
     ~MainWindow();
 
 private slots:
-    void on_SimulateButton_clicked();
 
-    void on_verticalScrollBar_actionTriggered(int action);
+    void ChooseAddPosition();
+    void AddChosen();
+    void on_actionOne_Way_triggered();
 
 private:
     Ui::MainWindow *ui;
+
+
 };
+
+
 
 #endif // MAINWINDOW_H
