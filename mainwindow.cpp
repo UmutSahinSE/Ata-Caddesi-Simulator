@@ -33,6 +33,7 @@ void MainWindow::AddChosen(/*probably will take an item pointer as parameter*/)
 void MainWindow::on_actionOne_Way_triggered()
 {
     //when one way road is chosen
+    //create road item
     connect(ui->buildLabel, SIGNAL(MousePos()),this, SLOT(ChooseAddPosition()));
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen(/*probably will take an item pointer as parameter*/)));
 }
