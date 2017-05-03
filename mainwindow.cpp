@@ -1,24 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mylabel.h"
-#include <QScrollArea>
-#include <QCursor>
-#include <QBitmap>
-
 
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-//    QBitmap nmap(":/pictures/One Way Road.png");
-//    QCursor ncursor(nmap);
-//    ui->BuildScreen->setCursor(ncursor);
     ui->setupUi(this);
     resize(1500,800);
-
-
-
 
 }
 
@@ -28,18 +18,23 @@ MainWindow::~MainWindow()
 }
 void MainWindow::ChooseAddPosition()
 {
-
+    //will probably be empty
 }
-void MainWindow::AddChosen()
+void MainWindow::AddChosen(/*probably will take an item pointer as parameter*/)
 {
+    //pull items coordinates from buildLabel (mylabel type object) and add it there
+    disconnect(ui->buildLabel, SIGNAL(MousePos()),this, SLOT(ChooseAddPosition()));
+    //you dont have to get the coordinates from buildlabel anymore
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
+    //disconnect mouse press events to negate  more than one operations
+    //automatically choose the added item
 
 }
 void MainWindow::on_actionOne_Way_triggered()
 {
-    //add one way road
+    //when one way road is chosen
     connect(ui->buildLabel, SIGNAL(MousePos()),this, SLOT(ChooseAddPosition()));
-    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
-
+    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen(/*probably will take an item pointer as parameter*/)));
 }
 
 

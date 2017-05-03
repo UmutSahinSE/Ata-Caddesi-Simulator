@@ -4,9 +4,6 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include <Qevent>
-#include <QDebug>
-#include <QPixmap>
-
 
 class MyLabel : public QWidget
 {
@@ -23,6 +20,7 @@ signals:
     void MousePos();
 
 public slots:
+
 };
 
 #endif // MYLABEL_H
