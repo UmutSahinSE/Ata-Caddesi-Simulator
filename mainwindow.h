@@ -19,9 +19,10 @@ public:
 
 private slots:
 
-    void ChooseAddPosition();
     void AddChosen();
     void on_actionOne_Way_triggered();
+
+    void on_actionTwo_Ways_triggered();
 
 private:
     Ui::MainWindow *ui;

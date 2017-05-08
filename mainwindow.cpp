@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mylabel.h"
+#include "onewayroad.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -16,27 +17,42 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::ChooseAddPosition()
-{
-    //will probably be empty
-}
+
 void MainWindow::AddChosen(/*probably will take an item pointer as parameter*/)
 {
-    //pull items coordinates from buildLabel (mylabel type object) and add it there
-    disconnect(ui->buildLabel, SIGNAL(MousePos()),this, SLOT(ChooseAddPosition()));
-    //you dont have to get the coordinates from buildlabel anymore
-    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
-    //disconnect mouse press events to negate  more than one operations
-    //automatically choose the added item
+
 
 }
 void MainWindow::on_actionOne_Way_triggered()
 {
+    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
     //when one way road is chosen
-    //create road item
-    connect(ui->buildLabel, SIGNAL(MousePos()),this, SLOT(ChooseAddPosition()));
-    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen(/*probably will take an item pointer as parameter*/)));
+
+    onewayroad *oneway=new onewayroad;
+    oneway->setParent(ui->BuildScroll);
+
+    oneway->show();
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
+
+
 }
 
+void MainWindow::on_actionTwo_Ways_triggered()
+{
+//    when two ways is chosen
+   connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
 
+   onewayroad *forward=new onewayroad;
+   forward->setParent(ui->BuildScroll);
+   forward->setGeometry(500,500,40,200);
+   forward->show();
 
+   onewayroad *backward=new onewayroad;
+   backward->setParent(ui->BuildScroll);
+   backward->convertToRed();
+   backward->setGeometry(460,500,40,200);
+   backward->show();
+
+   disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddChosen()));
+
+}

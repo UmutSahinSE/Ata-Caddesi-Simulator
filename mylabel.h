@@ -10,14 +10,13 @@ class MyLabel : public QWidget
     Q_OBJECT
 public:
     explicit MyLabel(QWidget *parent = 0);
-    void mouseMoveEvent(QMouseEvent *ev);
+
     void mousePressEvent(QMouseEvent *ev);
-    int x,y;
+     QPoint mouselocation;
 
 signals:
 
     void MousePressed();
-    void MousePos();
 
 public slots:
 

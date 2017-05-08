@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     caroption.cpp \
     mainwindow.cpp \
     zebracrossingoptions.cpp \
-    mylabel.cpp
+    mylabel.cpp \
+    onewayroad.cpp
 
 HEADERS  += \
     endoftheroadoptions.h \
@@ -55,6 +56,7 @@ FORMS    += \
     caroption.ui \
     mainwindow.ui \
     zebracrossingoptions.ui
+
 
 STATECHARTS += \
     Simulation_Screen.scxml
