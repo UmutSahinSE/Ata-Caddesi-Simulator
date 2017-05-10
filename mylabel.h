@@ -2,6 +2,7 @@
 #define MYLABEL_H
 
 #include <QWidget>
+#include <QLabel>
 #include <QMouseEvent>
 #include <Qevent>
 
@@ -10,14 +11,15 @@ class MyLabel : public QWidget
     Q_OBJECT
 public:
     explicit MyLabel(QWidget *parent = 0);
-    void mouseMoveEvent(QMouseEvent *ev);
+
     void mousePressEvent(QMouseEvent *ev);
-    int x,y;
+    void mouseMoveEvent(QMouseEvent *ev);
+    QPoint mouselocation;
 
 signals:
 
     void MousePressed();
-    void MousePos();
+    void MouseOnObject();
 
 public slots:
 

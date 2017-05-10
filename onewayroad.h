@@ -3,16 +3,20 @@
 
 #include <QLabel>
 #include <QLine>
+#include <QPixmap>
 
 
 class onewayroad : public QLabel
 {
 public:
     onewayroad();
+    void convertToRed();
+
 private:
     bool isBlue;
     QLine *roadLine;
-    QPixmap *roadImage;
+    QPixmap *blueRoadImage;
+    QPixmap *redRoadImage;
 };
 
 #endif // ONEWAYROAD_H

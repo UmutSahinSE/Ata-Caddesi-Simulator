@@ -1,14 +1,14 @@
 #include "roadoptions.h"
 #include "ui_roadoptions.h"
 
-CarOptions::CarOptions(QWidget *parent) :
+Roadoptions::Roadoptions(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::CarOptions)
+    ui(new Ui::Roadoptions)
 {
     ui->setupUi(this);
 }
 
-CarOptions::~CarOptions()
+Roadoptions::~Roadoptions()
 {
     delete ui;
 }

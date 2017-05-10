@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CarOptions</class>
- <widget class="QWidget" name="CarOptions">
+ <class>Roadoptions</class>
+ <widget class="QWidget" name="Roadoptions">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>146</width>
+    <width>123</width>
     <height>156</height>
    </rect>
   </property>
