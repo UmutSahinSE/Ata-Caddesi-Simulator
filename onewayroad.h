@@ -11,6 +11,7 @@ class onewayroad : public QLabel
 public:
     onewayroad();
     void convertToRed();
+
 private:
     bool isBlue;
     QLine *roadLine;

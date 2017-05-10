@@ -26,36 +26,42 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
     endoftheroadoptions.cpp \
     intersectionoptions.cpp \
-    roadoptions.cpp \
     signoptions.cpp \
     trafficlightoptions.cpp \
     caroption.cpp \
     mainwindow.cpp \
     zebracrossingoptions.cpp \
     mylabel.cpp \
-    onewayroad.cpp
+    onewayroad.cpp \
+    intersection.cpp \
+    refuge.cpp \
+    square.cpp \
+    roadoptions.cpp
 
 HEADERS  += \
     endoftheroadoptions.h \
     intersectionoptions.h \
-    roadoptions.h \
     signoptions.h \
     trafficlightoptions.h \
     caroption.h \
     mainwindow.h \
     zebracrossingoptions.h \
     onewayroad.h \
-    mylabel.h
+    mylabel.h \
+    intersection.h \
+    refuge.h \
+    square.h \
+    roadoptions.h
 
 FORMS    += \
     endoftheroadoptions.ui \
     intersectionoptions.ui \
-    roadoptions.ui \
     signoptions.ui \
     trafficlightoptions.ui \
     caroption.ui \
     mainwindow.ui \
-    zebracrossingoptions.ui
+    zebracrossingoptions.ui \
+    roadoptions.ui
 
 
 STATECHARTS += \

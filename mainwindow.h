@@ -14,15 +14,26 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-
     ~MainWindow();
 
 private slots:
 
-    void AddChosen();
+
+    void AddOneWayRoad();
+    void AddTwoWayRoad();
+    void AddTwoWayRoadWithRefuge();
+
+    void FrameItemOnHover();
+    void ChooseClickedItem();
+    void disconnectMouseEvents();
+
     void on_actionOne_Way_triggered();
 
     void on_actionTwo_Ways_triggered();
+
+    void on_ChooseButton_clicked();
+
+    void on_actionTwo_Ways_with_Refuge_triggered();
 
 private:
     Ui::MainWindow *ui;

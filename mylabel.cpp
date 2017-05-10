@@ -10,3 +10,9 @@ void MyLabel::mousePressEvent(QMouseEvent *ev)
     this->mouselocation=ev->pos();
     emit MousePressed();
 }
+
+void MyLabel::mouseMoveEvent(QMouseEvent *ev)
+{
+    this->mouselocation=ev->pos();
+    emit MouseOnObject();
+}

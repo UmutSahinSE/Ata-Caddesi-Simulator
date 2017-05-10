@@ -119,6 +119,8 @@
           <bool>true</bool>
          </property>
         </widget>
+        <zorder>buildimage</zorder>
+        <zorder>buildLabel</zorder>
        </widget>
       </widget>
       <widget class="QTabWidget" name="OptionScreen">
@@ -137,9 +139,9 @@
        <property name="tabBarAutoHide">
         <bool>false</bool>
        </property>
-       <widget class="QWidget" name="TrafficLightOptions">
+       <widget class="QWidget" name="Options">
         <attribute name="title">
-         <string>Traffic Light Options</string>
+         <string>Options</string>
         </attribute>
        </widget>
       </widget>
