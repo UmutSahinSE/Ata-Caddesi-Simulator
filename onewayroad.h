@@ -1,22 +1,22 @@
-#include <QImage>
-
 #ifndef ONEWAYROAD_H
 #define ONEWAYROAD_H
 
-#endif // ONEWAYROAD_H
+#include <QLabel>
+#include <QLine>
+#include <QPixmap>
 
-class OneWayRoadClass
+
+class onewayroad : public QLabel
 {
-private:
-    int height;
-    int width;
-    int location;
 public:
-    OneWayRoadClass()
-    {
-        height=200;
-        width=100;
-        location=0;
-    }
-    int getlocation() {return location;}
+    onewayroad();
+    void convertToRed();
+
+private:
+    bool isBlue;
+    QLine *roadLine;
+    QPixmap *blueRoadImage;
+    QPixmap *redRoadImage;
 };
+
+#endif // ONEWAYROAD_H

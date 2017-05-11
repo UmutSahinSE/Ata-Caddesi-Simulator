@@ -1,22 +1,22 @@
-#ifndef CAROPTIONS_H
-#define CAROPTIONS_H
+#ifndef ROADOPTIONS_H
+#define ROADOPTIONS_H
 
 #include <QWidget>
 
 namespace Ui {
-class CarOptions;
+class Roadoptions;
 }
 
-class CarOptions : public QWidget
+class Roadoptions : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit CarOptions(QWidget *parent = 0);
-    ~CarOptions();
+    explicit Roadoptions(QWidget *parent = 0);
+    ~Roadoptions();
 
 private:
-    Ui::CarOptions *ui;
+    Ui::Roadoptions *ui;
 };
 
-#endif // CAROPTIONS_H
+#endif // ROADOPTIONS_H

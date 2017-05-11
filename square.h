@@ -1,26 +1,15 @@
-#include <QImage>
-
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#endif // SQUARE_H
+#include <QLabel>
 
-class SquareClass
+
+class Square : public QLabel
 {
-private:
-    int height;
-    int width;
-    int location;
 public:
-    SquareClass()
-    {
-        height=200;
-        width=100;
-        location=0;
-    }
+    Square();
+private:
 
-    int getLocation() {return location;}
 };
 
-
-
+#endif // SQUARE_H
