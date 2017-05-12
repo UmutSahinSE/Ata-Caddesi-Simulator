@@ -22,6 +22,7 @@ private slots:
     void AddOneWayRoad();
     void AddTwoWayRoad();
     void AddTwoWayRoadWithRefuge();
+    void AddIntersection();
 
     void FrameItemOnHover();
     void ChooseClickedItem();
@@ -34,6 +35,8 @@ private slots:
     void on_ChooseButton_clicked();
 
     void on_actionTwo_Ways_with_Refuge_triggered();
+
+    void on_actionIntersection_triggered();
 
 private:
     Ui::MainWindow *ui;

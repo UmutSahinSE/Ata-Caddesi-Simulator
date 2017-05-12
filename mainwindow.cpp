@@ -4,6 +4,7 @@
 #include "onewayroad.h"
 #include "refuge.h"
 #include "roadoptions.h"
+#include "intersection.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -70,6 +71,17 @@ void MainWindow::AddTwoWayRoadWithRefuge()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTwoWayRoadWithRefuge()));
 }
 
+void MainWindow::AddIntersection()
+{
+    intersection *forward=new intersection;
+    forward->setParent(ui->buildLabel);
+    forward->setGeometry(ui->buildLabel->mouselocation.x()-40,ui->buildLabel->mouselocation.y()-40,80,80);
+    ui->buildLabel->raise();
+    forward->show();
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
+}
+
+
 void MainWindow::FrameItemOnHover()
 {
 
@@ -102,7 +114,7 @@ void MainWindow::disconnectMouseEvents()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTwoWayRoad()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTwoWayRoadWithRefuge()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(ChooseClickedItem()));
-//    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddEndOFTheRoad()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
@@ -135,4 +147,10 @@ void MainWindow::on_actionTwo_Ways_with_Refuge_triggered()
 {
     disconnectMouseEvents();
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTwoWayRoadWithRefuge()));
+}
+
+void MainWindow::on_actionIntersection_triggered()
+{
+    disconnectMouseEvents();
+    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
 }
