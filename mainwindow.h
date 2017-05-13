@@ -23,6 +23,9 @@ private slots:
     void AddTwoWayRoad();
     void AddTwoWayRoadWithRefuge();
     void AddIntersection();
+    void AddZebraCrossing();
+    void AddEndOfTheRoad();
+    void AddCarSpawn();
 
     void FrameItemOnHover();
     void ChooseClickedItem();
@@ -37,6 +40,12 @@ private slots:
     void on_actionTwo_Ways_with_Refuge_triggered();
 
     void on_actionIntersection_triggered();
+
+    void on_actionZebra_Crossings_triggered();
+
+    void on_actionIntersection_2_triggered();
+
+    void on_actionCar_triggered();
 
 private:
     Ui::MainWindow *ui;

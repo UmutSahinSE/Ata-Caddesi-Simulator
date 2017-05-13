@@ -195,7 +195,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -243,12 +243,12 @@
   </action>
   <action name="actionCar">
    <property name="text">
-    <string>Car </string>
+    <string>Car Spawn</string>
    </property>
   </action>
   <action name="actionIntersection_2">
    <property name="text">
-    <string>Intersection</string>
+    <string>End of the Road</string>
    </property>
   </action>
   <action name="actionSign">
