@@ -5,6 +5,7 @@
 #include "refuge.h"
 #include "roadoptions.h"
 #include "intersection.h"
+#include "zebracrossing.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -81,6 +82,16 @@ void MainWindow::AddIntersection()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
 }
 
+void MainWindow::AddZebraCrossing()
+{
+    zebracrossing *forward=new zebracrossing;
+    forward->setParent(ui->buildLabel);
+    forward->setGeometry(ui->buildLabel->mouselocation.x()-25,ui->buildLabel->mouselocation.y()-10,50,20);
+    ui->buildLabel->raise();
+    forward->show();
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
+}
+
 
 void MainWindow::FrameItemOnHover()
 {
@@ -119,7 +130,7 @@ void MainWindow::disconnectMouseEvents()
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddEndOFTheRoad()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
-//    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCar()));
 }
 void MainWindow::on_actionOne_Way_triggered()
@@ -153,4 +164,10 @@ void MainWindow::on_actionIntersection_triggered()
 {
     disconnectMouseEvents();
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
+}
+
+void MainWindow::on_actionZebra_Crossings_triggered()
+{
+    disconnectMouseEvents();
+    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
 }
