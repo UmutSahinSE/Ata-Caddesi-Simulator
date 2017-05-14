@@ -226,6 +226,7 @@
     <addaction name="actionCar"/>
     <addaction name="actionIntersection_2"/>
     <addaction name="actionSign"/>
+    <addaction name="actionTraffic_Light"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAdd"/>
@@ -294,6 +295,11 @@
   <action name="actionSave_as">
    <property name="text">
     <string>Save as...</string>
+   </property>
+  </action>
+  <action name="actionTraffic_Light">
+   <property name="text">
+    <string>Traffic Light</string>
    </property>
   </action>
  </widget>

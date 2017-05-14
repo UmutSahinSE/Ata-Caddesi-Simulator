@@ -8,6 +8,7 @@
 #include "zebracrossing.h"
 #include "endoftheroad.h"
 #include "carspawn.h"
+#include "trafficlight.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -114,6 +115,16 @@ void MainWindow::AddCarSpawn()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCarSpawn()));
 }
 
+void MainWindow::AddTrafficLight()
+{
+    trafficlight *forward=new trafficlight;
+    forward->setParent(ui->buildLabel);
+    forward->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-25,20,50);
+    ui->buildLabel->raise();
+    forward->show();
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
+}
+
 
 void MainWindow::FrameItemOnHover()
 {
@@ -151,7 +162,7 @@ void MainWindow::disconnectMouseEvents()
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddEndOfTheRoad()));
 //    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
-//    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCarSpawn()));
 }
@@ -204,4 +215,10 @@ void MainWindow::on_actionCar_triggered()
 {
     disconnectMouseEvents();
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCarSpawn()));
+}
+
+void MainWindow::on_actionTraffic_Light_triggered()
+{
+    disconnectMouseEvents();
+    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
 }
