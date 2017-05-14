@@ -26,6 +26,7 @@ private slots:
     void AddZebraCrossing();
     void AddEndOfTheRoad();
     void AddCarSpawn();
+    void AddTrafficLight();
 
     void FrameItemOnHover();
     void ChooseClickedItem();
@@ -46,6 +47,8 @@ private slots:
     void on_actionIntersection_2_triggered();
 
     void on_actionCar_triggered();
+
+    void on_actionTraffic_Light_triggered();
 
 private:
     Ui::MainWindow *ui;
