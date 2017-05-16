@@ -130,7 +130,7 @@ void MainWindow::AddSign()
 {
     sign *forward=new sign;
     forward->setParent(ui->buildLabel);
-    forward->setGeometry(ui->buildLabel->mouselocation.x()-25,ui->buildLabel->mouselocation.y()-25,50,50);
+    forward->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-10,20,20);
     ui->buildLabel->raise();
     forward->show();
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));

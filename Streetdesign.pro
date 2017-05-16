@@ -36,7 +36,12 @@ SOURCES += main.cpp\
     intersection.cpp \
     refuge.cpp \
     square.cpp \
-    roadoptions.cpp
+    roadoptions.cpp \
+    carspawn.cpp \
+    zebracrossing.cpp \
+    endoftheroad.cpp \
+    sign.cpp \
+    trafficlight.cpp
 
 HEADERS  += \
     endoftheroadoptions.h \
@@ -51,7 +56,15 @@ HEADERS  += \
     intersection.h \
     refuge.h \
     square.h \
-    roadoptions.h
+    roadoptions.h \
+    carspawn.h \
+    zebracrossing.h \
+    endoftheroad.h \
+    sign.h \
+    trafficlight.h \
+    twowaysroad.h \
+    twowayswithrefuge.h \
+    ui_mainwindow.h
 
 FORMS    += \
     endoftheroadoptions.ui \
@@ -68,7 +81,14 @@ STATECHARTS += \
     Simulation_Screen.scxml
 
 DISTFILES += \
-    Streetdesign.pro.user
+    Streetdesign.pro.user \
+    CarSpawn.png \
+    rectangle[737].png \
+    RoadEnd.png \
+    stopsign.png \
+    trafficlight.png \
+    zebracrossing.png \
+    README.md
 
 RESOURCES += \
     resources.qrc

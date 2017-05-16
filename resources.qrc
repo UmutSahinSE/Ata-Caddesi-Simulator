@@ -4,5 +4,11 @@
         <file>One Way Road.png</file>
         <file>greyRefuge.jpg</file>
         <file>One Way Road (Back).png</file>
+        <file>CarSpawn.png</file>
+        <file>rectangle[737].png</file>
+        <file>RoadEnd.png</file>
+        <file>stopsign.png</file>
+        <file>trafficlight.png</file>
+        <file>zebracrossing.png</file>
     </qresource>
 </RCC>

@@ -19,28 +19,28 @@
      <item>
       <widget class="QLabel" name="TypeLabel">
        <property name="text">
-        <string>Type </string>
+        <string>Sign Type:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="SpeedLimitRadio">
-       <property name="text">
-        <string>Speed Limit</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QRadioButton" name="SpeedLimitRadio">
+         <property name="text">
+          <string>Speed Limit</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QRadioButton" name="StopRadio">
        <property name="text">
         <string>Stop</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="radioButton_3">
-       <property name="text">
-        <string>RadioButton</string>
        </property>
       </widget>
      </item>

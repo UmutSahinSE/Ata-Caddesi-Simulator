@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>133</width>
-    <height>173</height>
+    <width>109</width>
+    <height>124</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,23 +15,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="NoRLabel">
-       <property name="text">
-        <string>Number of Roads</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="NumberOfRoadsEdit"/>
-     </item>
-    </layout>
-   </item>
-   <item>
     <widget class="QPushButton" name="pushButton_3">
      <property name="text">
-      <string>Replace Road Part</string>
+      <string>Rotate</string>
      </property>
     </widget>
    </item>
