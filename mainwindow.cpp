@@ -1,15 +1,23 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mylabel.h"
-#include "onewayroad.h"
 #include "refuge.h"
+#include "onewayroad.h"
 #include "roadoptions.h"
 #include "intersection.h"
+#include "intersectionoptions.h"
 #include "zebracrossing.h"
+#include "zebracrossingoptions.h"
 #include "endoftheroad.h"
+#include "endoftheroadoptions.h"
 #include "carspawn.h"
+#include "caroption.h"
 #include "trafficlight.h"
+#include "trafficlightoptions.h"
 #include "sign.h"
+#include "signoptions.h"
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -149,16 +157,104 @@ void MainWindow::FrameItemOnHover()
 
 void MainWindow::ChooseClickedItem()
 {
-    QLabel* label= static_cast<QLabel*>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
-    if(!label)
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(ChooseClickedItem()));
         return;
-    if(label->metaObject()->className()=="onewayroad")
+    }
+    onewayroad dummy1;
+    sign dummy2;
+    endoftheroad dummy3;
+    carspawn dummy4;
+    trafficlight dummy5;
+    zebracrossing dummy6;
+    intersection dummy7;
+    refuge dummy8;
+    //square dummy9;
+
+    if((ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className())==dummy1.metaObject()->className())
     {
         Roadoptions *newtab=new Roadoptions;
         QString tabname("Road Options");
         ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedOneWayRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
         ui->OptionScreen->removeTab(0);
     }
+
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy2.metaObject()->className())
+    {
+        SignOptions *newtab=new SignOptions;
+        QString tabname("Sign Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedSign=static_cast<sign *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy3.metaObject()->className())
+    {
+        EndOfTheRoadOptions *newtab=new EndOfTheRoadOptions;
+        QString tabname("End of the Road Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedEndOfTheRoad=static_cast<endoftheroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy4.metaObject()->className())
+    {
+        CarOption *newtab=new CarOption;
+        QString tabname("Car Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedCarSpawn=static_cast<carspawn *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy5.metaObject()->className())
+    {
+        TrafficLightOptions *newtab=new TrafficLightOptions;
+        QString tabname("Traffic Light Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedTrafficLight=static_cast<trafficlight *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy6.metaObject()->className())
+    {
+        ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+        QString tabname("Zebra Crossing Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedZebraCrossing=static_cast<zebracrossing *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy7.metaObject()->className())
+    {
+        IntersectionOptions *newtab=new IntersectionOptions;
+        QString tabname("Intersection Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedIntersection=static_cast<intersection *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+
+/*
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy8.metaObject()->className())
+    {
+        RefugeOptions *newtab=new RefugeOptions;
+        QString tabname("Refuge Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedRefuge=static_cast<refuge*>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy9.metaObject()->className())
+    {
+        SquareOptions *newtab=new SquareOptions;
+        QString tabname("Square Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedSquare=static_cast<square*>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        ui->OptionScreen->removeTab(0);
+    }
+    */
+
+
     disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(ChooseClickedItem()));
 
 }

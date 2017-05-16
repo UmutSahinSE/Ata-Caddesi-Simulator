@@ -3,6 +3,7 @@
 
 #include <QLabel>
 #include <QRect>
+#include <QPixmap>
 
 
 class intersection : public QLabel
