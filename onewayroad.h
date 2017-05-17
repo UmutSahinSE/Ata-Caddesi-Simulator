@@ -15,9 +15,10 @@ public:
     void rotateEast();
     void rotateWest();
     int roadAngle;
+    QLine *roadLine;
 private:
 
-    QLine *roadLine;
+
     QPixmap *blueRoadImage;
 };
 

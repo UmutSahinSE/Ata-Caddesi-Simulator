@@ -9,8 +9,9 @@ class endoftheroad : public QLabel
 {
 public:
     endoftheroad();
+    void rotate();
+    bool isVerticle;
 private:
-    QRect *roadEndRect;
     QPixmap *roadEndImage;
 };
 

@@ -9,8 +9,9 @@ class carspawn : public QLabel
 {
 public:
     carspawn();
+    void rotate();
+    bool isVerticle;
 private:
-    QRect *carspawnRect;
     QPixmap *carspawnImage;
 };
 

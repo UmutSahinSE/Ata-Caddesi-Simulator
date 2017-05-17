@@ -2,7 +2,6 @@
 #define ZEBRACROSSING_H
 
 #include <QLabel>
-#include <QRect>
 #include <QPixmap>
 
 
@@ -10,8 +9,8 @@ class zebracrossing : public QLabel
 {
 public:
     zebracrossing();
-public:
-    QRect *zebraRect;
+    void rotate();
+    bool isVerticle;
     QPixmap *zebraImage;
 };
 

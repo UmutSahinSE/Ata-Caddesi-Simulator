@@ -79,13 +79,6 @@ STATECHARTS += \
     Simulation_Screen.scxml
 
 DISTFILES += \
-    Streetdesign.pro.user \
-    CarSpawn.png \
-    rectangle[737].png \
-    RoadEnd.png \
-    stopsign.png \
-    trafficlight.png \
-    zebracrossing.png \
     README.md
 
 RESOURCES += \

@@ -39,6 +39,7 @@ void MainWindow::AddOneWayRoad()
     onewayroad *oneway=new onewayroad;
     oneway->setParent(ui->buildLabel);
     oneway->setGeometry(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->mouselocation.y()-100,40,200);
+    oneway->roadLine->setLine(oneway->x()+20,oneway->y()+200,oneway->x()+20,oneway->y());
     ui->buildLabel->raise();
     oneway->show();
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddOneWayRoad()));
@@ -49,13 +50,15 @@ void MainWindow::AddTwoWayRoad()
     onewayroad *forward=new onewayroad;
     forward->setParent(ui->buildLabel);
     forward->setGeometry(ui->buildLabel->mouselocation.x(),ui->buildLabel->mouselocation.y()-100,40,200);
+    forward->roadLine->setLine(forward->x()+20,forward->y()+200,forward->x()+20,forward->y());
     ui->buildLabel->raise();
     forward->show();
 
     onewayroad *backward=new onewayroad;
     backward->setParent(ui->buildLabel);
-    backward->rotateSouth();
     backward->setGeometry(ui->buildLabel->mouselocation.x()-40,ui->buildLabel->mouselocation.y()-100,40,200);
+    backward->roadLine->setLine(backward->x()+20,backward->y()+200,backward->x()+20,backward->y());
+    backward->rotateSouth();
     ui->buildLabel->raise();
     backward->show();
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTwoWayRoad()));
@@ -66,19 +69,22 @@ void MainWindow::AddTwoWayRoadWithRefuge()
     onewayroad *forward=new onewayroad;
     forward->setParent(ui->buildLabel);
     forward->setGeometry(ui->buildLabel->mouselocation.x()+10,ui->buildLabel->mouselocation.y()-100,40,200);
+    forward->roadLine->setLine(forward->x()+20,forward->y()+200,forward->x()+20,forward->y());
     ui->buildLabel->raise();
     forward->show();
 
     onewayroad *backward=new onewayroad;
     backward->setParent(ui->buildLabel);
-    backward->rotateSouth();
     backward->setGeometry(ui->buildLabel->mouselocation.x()-50,ui->buildLabel->mouselocation.y()-100,40,200);
+    backward->roadLine->setLine(backward->x()+20,backward->y()+200,backward->x()+20,backward->y());
+    backward->rotateSouth();
     ui->buildLabel->raise();
     backward->show();
 
     refuge *refugePtr=new refuge;
     refugePtr->setParent(ui->buildLabel);
     refugePtr->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-100,20,200);
+    refugePtr->refugeLine->setLine(refugePtr->x()+10,refugePtr->y()+200,refugePtr->x()+10,refugePtr->y());
     ui->buildLabel->raise();
     refugePtr->show();
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTwoWayRoadWithRefuge()));
@@ -96,31 +102,132 @@ void MainWindow::AddIntersection()
 
 void MainWindow::AddZebraCrossing()
 {
-    zebracrossing *forward=new zebracrossing;
-    forward->setParent(ui->buildLabel);
-    forward->setGeometry(ui->buildLabel->mouselocation.x()-25,ui->buildLabel->mouselocation.y()-10,50,20);
-    ui->buildLabel->raise();
-    forward->show();
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddZebraCrossing()));
+        return;
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90||static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
+        {
+            zebracrossing *crossing=new zebracrossing;
+            crossing->setParent(ui->buildLabel);
+            crossing->setGeometry(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->mouselocation.y()-10,40,20);
+            ui->buildLabel->raise();
+            crossing->show();
+        }
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0||static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+        {
+            zebracrossing *crossing=new zebracrossing;
+            crossing->setParent(ui->buildLabel);
+            crossing->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y(),20,40);
+            crossing->rotate();
+            ui->buildLabel->raise();
+            crossing->show();
+        }
+    }
+
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
 }
 
 void MainWindow::AddEndOfTheRoad()
 {
-    endoftheroad *forward=new endoftheroad;
-    forward->setParent(ui->buildLabel);
-    forward->setGeometry(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->mouselocation.y()-5,40,10);
-    ui->buildLabel->raise();
-    forward->show();
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddEndOfTheRoad()));
+        return;
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
+        {
+            endoftheroad *end=new endoftheroad;
+            end->setParent(ui->buildLabel);
+            end->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x2()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y2(),40,10);
+            ui->buildLabel->raise();
+            end->show();
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
+        {
+            endoftheroad *end=new endoftheroad;
+            end->setParent(ui->buildLabel);
+            end->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x2()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y2()-10,40,10);
+            ui->buildLabel->raise();
+            end->show();
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
+        {
+            endoftheroad *end=new endoftheroad;
+            end->setParent(ui->buildLabel);
+            end->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x2()-10,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y2()-20,40,10);
+            end->rotate();
+            ui->buildLabel->raise();
+            end->show();
+        }
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+        {
+            endoftheroad *end=new endoftheroad;
+            end->setParent(ui->buildLabel);
+            end->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x2(),static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y2()-20,40,10);
+            end->rotate();
+            ui->buildLabel->raise();
+            end->show();
+        }
+    }
+
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddEndOfTheRoad()));
 }
 
 void MainWindow::AddCarSpawn()
 {
-    carspawn *forward=new carspawn;
-    forward->setParent(ui->buildLabel);
-    forward->setGeometry(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->mouselocation.y()-5,40,10);
-    ui->buildLabel->raise();
-    forward->show();
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddCarSpawn()));
+        return;
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
+        {
+            carspawn *spawn=new carspawn;
+            spawn->setParent(ui->buildLabel);
+            spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1(),40,10);
+            ui->buildLabel->raise();
+            spawn->show();
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
+        {
+            carspawn *spawn=new carspawn;
+            spawn->setParent(ui->buildLabel);
+            spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1()-10,40,10);
+            ui->buildLabel->raise();
+            spawn->show();
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+        {
+            carspawn *spawn=new carspawn;
+            spawn->setParent(ui->buildLabel);
+            spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1()-10,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1()-20,40,10);
+            spawn->rotate();
+            ui->buildLabel->raise();
+            spawn->show();
+        }
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
+        {
+            carspawn *spawn=new carspawn;
+            spawn->setParent(ui->buildLabel);
+            spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1(),static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1()-20,40,10);
+            spawn->rotate();
+            ui->buildLabel->raise();
+            spawn->show();
+        }
+    }
+
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCarSpawn()));
 }
 
