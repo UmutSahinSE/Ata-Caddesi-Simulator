@@ -2,20 +2,147 @@
 
 onewayroad::onewayroad()
 {
-    isBlue=true;
+    roadAngle=90;
     this->setGeometry(300,300,40,200);
+    this->setAccessibleDescription("onewayroad");
     roadLine=new QLine(this->x()+20, this->y()+200, this->x()+20, this->y());
     blueRoadImage=new QPixmap(":/pictures/One Way Road.png");
     setPixmap((*blueRoadImage).scaled(40,200));
-    redRoadImage=new QPixmap(":/pictures/One Way Road (Back).png");
-
 }
 
-void onewayroad::convertToRed()
+void onewayroad::rotateNorth()
 {
-    isBlue=false;
-    QLine *copy= new QLine(roadLine->x2(),roadLine->y2(),roadLine->x1(),roadLine->y1());
-    roadLine->setLine(copy->x1(),copy->y1(),copy->x2(),copy->y2());
-    delete copy;
-    setPixmap((*redRoadImage).scaled(this->width(),this->height()));
+    if(roadAngle==90) return;
+    if(roadAngle==0)
+    {
+        roadAngle=90;
+        setGeometry(x()+80,y()-80,40,200);
+        roadLine->setLine(this->x()+20, this->y()+200, this->x()+20, this->y());
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(0)));
+        setPixmap(newpix.scaled(40,200));
+        return;
+    }
+    if(roadAngle==180)
+    {
+        roadAngle=90;
+        setGeometry(x()+80,y()-80,40,200);
+        roadLine->setLine(this->x()+20, this->y()+200, this->x()+20, this->y());
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(0)));
+        setPixmap(newpix.scaled(40,200));
+        return;
+    }
+    if(roadAngle==270)
+    {
+        roadAngle=90;
+        roadLine->setPoints(roadLine->p2(),roadLine->p1());
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(0)));
+        setPixmap(newpix.scaled(40,200));
+        return;
+    }
 }
+
+void onewayroad::rotateSouth()
+{
+    if(roadAngle==270) return;
+    if(roadAngle==90)
+    {
+        roadAngle=270;
+        roadLine->setPoints(roadLine->p2(),roadLine->p1());
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(180)));
+        setPixmap(newpix.scaled(40,200));
+        return;
+    }
+    if(roadAngle==0)
+    {
+        roadAngle=270;
+        setGeometry(x()+80,y()-80,40,200);
+        roadLine->setLine(this->x()+20, this->y(), this->x()+20, this->y()+200);
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(180)));
+        setPixmap(newpix.scaled(40,200));
+        return;
+    }
+    if(roadAngle==180)
+    {
+        roadAngle=270;
+        setGeometry(x()+80,y()-80,40,200);
+        roadLine->setLine(this->x()+20, this->y(), this->x()+20, this->y()+180);
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(180)));
+        setPixmap(newpix.scaled(40,200));
+        return;
+    }
+
+
+}
+
+void onewayroad::rotateEast()
+{
+    if(roadAngle==0) return;
+    if(roadAngle==90)
+    {
+        roadAngle=0;
+        setGeometry(x()-80,y()+80,200,40);
+        roadLine->setLine(this->x(), this->y()+20, this->x()+200, this->y()+20);
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(90)));
+        setPixmap(newpix.scaled(200,40));
+    }
+    if(roadAngle==180)
+    {
+        roadAngle=0;
+        roadLine->setPoints(roadLine->p2(),roadLine->p1());
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(90)));
+        setPixmap(newpix.scaled(200,40));
+        return;
+    }
+    if(roadAngle==270)
+    {
+        roadAngle=0;
+        setGeometry(x()-80,y()+80,200,40);
+        roadLine->setLine(this->x(), this->y()+20, this->x()+200, this->y()+20);
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(90)));
+        setPixmap(newpix.scaled(200,40));
+        return;
+    }
+}
+
+void onewayroad::rotateWest()
+{
+    if(roadAngle==180) return;
+    if(roadAngle==0)
+    {
+        roadAngle=180;
+        roadLine->setPoints(roadLine->p2(),roadLine->p1());
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(270)));
+        setPixmap(newpix.scaled(200,40));
+    }
+    if(roadAngle==90)
+    {
+        roadAngle=180;
+        setGeometry(x()-80,y()+80,200,40);
+        roadLine->setLine(this->x()+200, this->y()+20, this->x(), this->y()+20);
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(270)));
+        setPixmap(newpix.scaled(200,40));
+        return;
+    }
+    if(roadAngle==270)
+    {
+        roadAngle=180;
+        setGeometry(x()-80,y()+80,200,40);
+        roadLine->setLine(this->x()+200, this->y()+20, this->x(), this->y()+20);
+        QTransform rotatePix;
+        QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(270)));
+        setPixmap(newpix.scaled(200,40));
+        return;
+    }
+}
+

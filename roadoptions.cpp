@@ -12,3 +12,23 @@ Roadoptions::~Roadoptions()
 {
     delete ui;
 }
+
+void Roadoptions::on_FlowEast_clicked()
+{
+    selectedOneWayRoad->rotateEast();
+}
+
+void Roadoptions::on_FlowWest_clicked()
+{
+    selectedOneWayRoad->rotateWest();
+}
+
+void Roadoptions::on_FlowSouth_clicked()
+{
+    selectedOneWayRoad->rotateSouth();
+}
+
+void Roadoptions::on_FlowNorth_clicked()
+{
+    selectedOneWayRoad->rotateNorth();
+}

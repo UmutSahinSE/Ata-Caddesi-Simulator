@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>144</width>
+    <width>178</width>
     <height>150</height>
    </rect>
   </property>
@@ -24,30 +24,30 @@
    <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QPushButton" name="FlowNorth">
        <property name="text">
-        <string>North</string>
+        <string>Flow North</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QRadioButton" name="radioButton_2">
+     <item row="1" column="0">
+      <widget class="QPushButton" name="FlowWest">
        <property name="text">
-        <string>West</string>
+        <string>Flow West</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QRadioButton" name="radioButton_3">
+      <widget class="QPushButton" name="FlowSouth">
        <property name="text">
-        <string>South</string>
+        <string>Flow South</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QRadioButton" name="radioButton_4">
+     <item row="1" column="1">
+      <widget class="QPushButton" name="FlowEast">
        <property name="text">
-        <string>East</string>
+        <string>Flow East</string>
        </property>
       </widget>
      </item>

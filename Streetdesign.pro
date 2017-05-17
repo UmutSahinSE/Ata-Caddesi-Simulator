@@ -62,8 +62,6 @@ HEADERS  += \
     endoftheroad.h \
     sign.h \
     trafficlight.h \
-    twowaysroad.h \
-    twowayswithrefuge.h \
     ui_mainwindow.h
 
 FORMS    += \

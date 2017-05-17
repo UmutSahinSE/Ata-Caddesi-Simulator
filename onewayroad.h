@@ -10,13 +10,15 @@ class onewayroad : public QLabel
 {
 public:
     onewayroad();
-    void convertToRed();
-
+    void rotateNorth();
+    void rotateSouth();
+    void rotateEast();
+    void rotateWest();
+    int roadAngle;
 private:
-    bool isBlue;
+
     QLine *roadLine;
     QPixmap *blueRoadImage;
-    QPixmap *redRoadImage;
 };
 
 #endif // ONEWAYROAD_H
