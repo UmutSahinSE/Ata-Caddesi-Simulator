@@ -2,5 +2,6 @@
 
 Square::Square()
 {
+    setAccessibleDescription("square");
 
 }

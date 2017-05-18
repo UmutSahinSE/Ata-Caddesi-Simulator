@@ -2,6 +2,7 @@
 
 zebracrossing::zebracrossing()
 {
+    setAccessibleDescription("zebracrossing");
     isVerticle=true;
     this->setGeometry(100,100,40,20);
     zebraImage=new QPixmap(":/pictures/zebracrossing.png");

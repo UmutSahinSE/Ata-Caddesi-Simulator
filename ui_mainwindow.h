@@ -46,7 +46,6 @@ public:
     QAction *actionOpen;
     QAction *actionSave;
     QAction *actionSave_as;
-    QAction *actionTraffic_Light;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QSplitter *splitter;
@@ -103,8 +102,6 @@ public:
         actionSave->setObjectName(QStringLiteral("actionSave"));
         actionSave_as = new QAction(MainWindow);
         actionSave_as->setObjectName(QStringLiteral("actionSave_as"));
-        actionTraffic_Light = new QAction(MainWindow);
-        actionTraffic_Light->setObjectName(QStringLiteral("actionTraffic_Light"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -186,7 +183,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 21));
+        menuBar->setGeometry(QRect(0, 0, 600, 24));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuAdd = new QMenu(menuBar);
@@ -210,7 +207,6 @@ public:
         menuAdd->addAction(actionCar);
         menuAdd->addAction(actionIntersection_2);
         menuAdd->addAction(actionSign);
-        menuAdd->addAction(actionTraffic_Light);
         menuRoad->addAction(actionOne_Way);
         menuRoad->addAction(actionTwo_Ways);
         menuRoad->addAction(actionTwo_Ways_with_Refuge);
@@ -240,10 +236,9 @@ public:
         actionOpen->setText(QApplication::translate("MainWindow", "Open", Q_NULLPTR));
         actionSave->setText(QApplication::translate("MainWindow", "Save", Q_NULLPTR));
         actionSave_as->setText(QApplication::translate("MainWindow", "Save as...", Q_NULLPTR));
-        actionTraffic_Light->setText(QApplication::translate("MainWindow", "Traffic Light", Q_NULLPTR));
         buildimage->setText(QString());
         OptionScreen->setTabText(OptionScreen->indexOf(Options), QApplication::translate("MainWindow", "Options", Q_NULLPTR));
-        ChooseButton->setText(QApplication::translate("MainWindow", "Choose", Q_NULLPTR));
+        ChooseButton->setText(QApplication::translate("MainWindow", "Select", Q_NULLPTR));
         SimulateButton->setText(QApplication::translate("MainWindow", "Simulate", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", Q_NULLPTR));
         menuAdd->setTitle(QApplication::translate("MainWindow", "Add", Q_NULLPTR));
