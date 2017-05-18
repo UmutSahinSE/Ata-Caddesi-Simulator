@@ -29,6 +29,7 @@ private slots:
     void AddCarSpawn();
     void AddTrafficLight();
     void AddSign();
+    void AddSquare();
 
     void FrameItemOnHover();
     void ChooseClickedItem();
@@ -53,6 +54,8 @@ private slots:
     void on_actionTraffic_Light_triggered();
 
     void on_actionSign_triggered();
+
+    void on_actionSquare_triggered();
 
 private:
     Ui::MainWindow *ui;

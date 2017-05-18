@@ -16,6 +16,7 @@
 #include "trafficlightoptions.h"
 #include "sign.h"
 #include "signoptions.h"
+#include "square.h"
 
 
 
@@ -251,6 +252,18 @@ void MainWindow::AddSign()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
 }
 
+void MainWindow::AddSquare()
+{
+    Square *circle=new Square;
+    circle->setParent(ui->buildLabel);
+    circle->setGeometry(ui->buildLabel->mouselocation.x()-80, ui->buildLabel->mouselocation.y()-80,160,160);
+    ui->buildLabel->raise();
+    circle->show();
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()), this, SLOT(AddSquare()));
+
+
+}
+
 
 void MainWindow::FrameItemOnHover()
 {
@@ -366,7 +379,7 @@ void MainWindow::disconnectMouseEvents()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddEndOfTheRoad()));
-//    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddZebraCrossing()));
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCarSpawn()));
@@ -431,4 +444,10 @@ void MainWindow::on_actionSign_triggered()
 {
     disconnectMouseEvents();
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
+}
+
+void MainWindow::on_actionSquare_triggered()
+{
+    disconnectMouseEvents();
+    connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
 }
