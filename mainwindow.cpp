@@ -425,6 +425,98 @@ void MainWindow::AddSquare()
     disconnect(ui->buildLabel, SIGNAL(MousePressed()), this, SLOT(AddSquare()));
 }
 
+void MainWindow::ReplaceRoad(QLabel *ChoosenRoad)
+{
+    onewayroad *tempRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+    onewayroad *ChoosenTemp=static_cast<onewayroad *>(ChoosenRoad);
+    intersection *tempIntersection=static_cast<intersection *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+    Square *tempSquare=static_cast<Square *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+
+    tempRoad->setUpdatesEnabled(false);
+    qDeleteAll(tempRoad->findChildren<QWidget*>("", Qt::FindDirectChildrenOnly));
+    tempRoad->setUpdatesEnabled(true);
+
+    tempRoad->setParent(ui->buildLabel);
+    tempRoad->setGeometry(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->mouselocation.y()-100,40,200);
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="intersection")
+        {
+            if(ChoosenTemp->roadAngle==90)
+            {
+                if(tempIntersection->y()+40<=ui->buildLabel->mouselocation.y()) //if lower half is clicked
+                tempIntersection->move(tempIntersection->x()+40,tempIntersection->y()+80);
+                else //if upper half is clicked
+                tempIntersection->move(tempIntersection->x()+40,tempIntersection->y()-200);
+            }
+            else if(ChoosenTemp->roadAngle==180)
+            {
+                if(tempIntersection->x()+40<=ui->buildLabel->mouselocation.y()) //if lower half is clicked
+                tempIntersection->move(tempIntersection->x()+40,tempIntersection->y()+80);
+                else //if upper half is clicked
+                tempIntersection->move(tempIntersection->x()+40,tempIntersection->y()-200);
+            }
+
+        }
+        else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="square")
+        {
+            if(tempSquare->y()+80<=ui->buildLabel->mouselocation.y()) //if lower half is clicked
+            tempSquare->move(ui->buildLabel->mouselocation.x()-20,tempSquare->y()+160);
+            else //if upper half is clicked
+            tempSquare->move(ui->buildLabel->mouselocation.x()-20,tempSquare->y()-200);
+        }
+        else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+        {
+           if(static_cast<onewayroad *>(tempRoad)->roadAngle==0)
+           {
+                tempRoad->move(ui->buildLabel->mouselocation.x()-20,tempRoad->y()-180);
+
+                     if(ui->buildLabel->mouselocation.x()>=static_cast<onewayroad *>(tempRoad)->roadLine->x2()-40) //if tip of road is clicked(40 pixel)
+                     {
+                        tempRoad->move(static_cast<onewayroad *>(tempRoad)->roadLine->x2()-40,tempRoad->y()-180);
+                     }
+           }
+           else if(static_cast<onewayroad *>(tempRoad)->roadAngle==180)
+           {
+               tempRoad->move(ui->buildLabel->mouselocation.x()-20,tempRoad->y()-180);
+
+                    if(ui->buildLabel->mouselocation.x()<=static_cast<onewayroad *>(tempRoad)->roadLine->x2()+40)
+                    {
+                       tempRoad->move(static_cast<onewayroad *>(tempRoad)->roadLine->x2(),tempRoad->y()-180);
+                    }
+           }
+           else if(static_cast<onewayroad *>(tempRoad)->roadAngle==90)
+           {
+               tempRoad->move(static_cast<onewayroad *>(tempRoad)->roadLine->x2()-20,static_cast<onewayroad *>(tempRoad)->roadLine->y2()-200);
+           }
+           else
+           {
+               delete tempRoad;
+               return;
+           }
+
+        }
+    }
+    tempRoad->roadLine->setLine(tempRoad->x()+20,tempRoad->y()+200,tempRoad->x()+20,tempRoad->y());
+    ui->buildLabel->raise();
+    tempRoad->show();
+    disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddOneWayRoad()));
+}
+
+void MainWindow::ChooseRoad()
+{
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(ChooseRoad()));
+        return;
+    }
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(ReplaceRoad(ui->buildLabel->childAt(ui->buildLabel->mouselocation))));
+    }
+
+}
+
 
 void MainWindow::FrameItemOnHover()
 {
@@ -450,6 +542,7 @@ void MainWindow::ChooseClickedItem()
         QString tabname("Road Options");
         ui->OptionScreen->addTab(newtab,tabname);
         newtab->selectedOneWayRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        newtab->buildLabel=ui->buildLabel;
         ui->OptionScreen->removeTab(0);
    }
 
@@ -595,13 +688,6 @@ void MainWindow::on_actionSquare_triggered()
 
 void MainWindow::on_actionNew_triggered()
 {
-    /*delete ui->buildLabel;
-    MyLabel *buildLabel=new MyLabel;
-    buildLabel->setObjectName("buildLabel");
-    buildLabel->setMouseTracking(true);
-    buildLabel->setParent(ui->BuildScreen);
-    buildLabel->setGeometry(0,0,5000,5000);
-    buildLabel->raise();*/
     ui->buildLabel->setUpdatesEnabled(false);
     qDeleteAll(ui->buildLabel->findChildren<QWidget*>("", Qt::FindDirectChildrenOnly));
     ui->buildLabel->setUpdatesEnabled(true);

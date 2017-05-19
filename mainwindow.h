@@ -30,6 +30,8 @@ private slots:
     void AddTrafficLight();
     void AddSign();
     void AddSquare();
+    void ReplaceRoad(QLabel *ChoosenRoad);
+    void ChooseRoad();
 
     void FrameItemOnHover();
     void ChooseClickedItem();

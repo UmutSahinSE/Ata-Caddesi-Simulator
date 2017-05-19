@@ -32,3 +32,8 @@ void Roadoptions::on_FlowNorth_clicked()
 {
     selectedOneWayRoad->rotateNorth();
 }
+
+void Roadoptions::on_ReplaceButton_clicked()
+{
+    connect(buildLabel, SIGNAL(MousePressed()),tempMW,SLOT(ChooseRoad()));
+}

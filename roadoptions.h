@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "onewayroad.h"
+#include "mainwindow.h"
+#include "mylabel.h"
 
 namespace Ui {
 class Roadoptions;
@@ -14,6 +16,8 @@ class Roadoptions : public QWidget
 
 public:
     onewayroad *selectedOneWayRoad;
+    MyLabel *buildLabel;
+    MainWindow *tempMW;
     explicit Roadoptions(QWidget *parent = 0);
     ~Roadoptions();
 
@@ -26,6 +30,8 @@ private slots:
     void on_FlowSouth_clicked();
 
     void on_FlowNorth_clicked();
+
+    void on_ReplaceButton_clicked();
 
 private:
     Ui::Roadoptions *ui;
