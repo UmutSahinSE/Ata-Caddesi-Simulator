@@ -79,7 +79,8 @@ STATECHARTS += \
     Simulation_Screen.scxml
 
 DISTFILES += \
-    README.md
+    README.md \
+    RedLight.png
 
 RESOURCES += \
     resources.qrc

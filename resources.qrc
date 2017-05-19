@@ -11,5 +11,7 @@
         <file>zebracrossing.png</file>
         <file>points.png</file>
         <file>Square.jpg</file>
+        <file>Green Light.png</file>
+        <file>RedLight.png</file>
     </qresource>
 </RCC>

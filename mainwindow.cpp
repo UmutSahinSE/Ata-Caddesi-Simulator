@@ -346,21 +346,72 @@ void MainWindow::AddCarSpawn()
 
 void MainWindow::AddTrafficLight()
 {
-    trafficlight *forward=new trafficlight;
-    forward->setParent(ui->buildLabel);
-    forward->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-25,20,50);
-    ui->buildLabel->raise();
-    forward->show();
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddCarSpawn()));
+        return;
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        trafficlight *light=new trafficlight;
+        light->setParent(ui->buildLabel);
+        if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
+        {
+            light->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-20,ui->buildLabel->mouselocation.y()-15);
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
+        {
+            light->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->mouselocation.y()-15);
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+        {
+            light->move(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-30);
+        }
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
+        {
+            light->move(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-30);
+        }
+        ui->buildLabel->raise();
+        light->show();
+    }
+
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
 }
 
 void MainWindow::AddSign()
 {
-    sign *forward=new sign;
-    forward->setParent(ui->buildLabel);
-    forward->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-10,20,20);
-    ui->buildLabel->raise();
-    forward->show();
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddCarSpawn()));
+        return;
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        sign *newsign=new sign;
+        newsign->setParent(ui->buildLabel);
+        if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
+        {
+            newsign->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-20,ui->buildLabel->mouselocation.y()-10);
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
+        {
+            newsign->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->mouselocation.y()-10);
+        }
+
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+        {
+            newsign->move(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-20);
+        }
+        else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
+        {
+            newsign->move(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-20);
+        }
+        ui->buildLabel->raise();
+        newsign->show();
+    }
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
 }
 
@@ -456,24 +507,6 @@ void MainWindow::ChooseClickedItem()
         ui->OptionScreen->removeTab(0);
     }
 
-/*
-    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy8.metaObject()->className())
-    {
-        RefugeOptions *newtab=new RefugeOptions;
-        QString tabname("Refuge Options");
-        ui->OptionScreen->addTab(newtab,tabname);
-        newtab->selectedRefuge=static_cast<refuge*>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
-        ui->OptionScreen->removeTab(0);
-    }
-    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->metaObject()->className()==dummy9.metaObject()->className())
-    {
-        SquareOptions *newtab=new SquareOptions;
-        QString tabname("Square Options");
-        ui->OptionScreen->addTab(newtab,tabname);
-        newtab->selectedSquare=static_cast<square*>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
-        ui->OptionScreen->removeTab(0);
-    }
-    */
     disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(ChooseClickedItem()));
 
 }
@@ -558,4 +591,18 @@ void MainWindow::on_actionSquare_triggered()
 {
     disconnectMouseEvents();
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSquare()));
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+    /*delete ui->buildLabel;
+    MyLabel *buildLabel=new MyLabel;
+    buildLabel->setObjectName("buildLabel");
+    buildLabel->setMouseTracking(true);
+    buildLabel->setParent(ui->BuildScreen);
+    buildLabel->setGeometry(0,0,5000,5000);
+    buildLabel->raise();*/
+    ui->buildLabel->setUpdatesEnabled(false);
+    qDeleteAll(ui->buildLabel->findChildren<QWidget*>("", Qt::FindDirectChildrenOnly));
+    ui->buildLabel->setUpdatesEnabled(true);
 }

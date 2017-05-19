@@ -11,8 +11,8 @@ class trafficlight : public QLabel
 {
 public:
     trafficlight();
+    bool isRed;
 private:
-    QRect *lightRect;
     QPixmap *lightGif;
 };
 
