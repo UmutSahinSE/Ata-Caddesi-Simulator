@@ -9,5 +9,7 @@
         <file>stopsign.png</file>
         <file>trafficlight.png</file>
         <file>zebracrossing.png</file>
+        <file>points.png</file>
+        <file>Square.jpg</file>
     </qresource>
 </RCC>

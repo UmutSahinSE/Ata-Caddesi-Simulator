@@ -10,9 +10,10 @@ class Square : public QLabel
 {
 public:
     Square();
-private:
     QRect *squareRect;
     QPixmap *squareImage;
+private:
+
 
 };
 
