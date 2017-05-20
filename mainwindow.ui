@@ -195,7 +195,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -227,6 +227,7 @@
     <addaction name="actionIntersection_2"/>
     <addaction name="actionSign"/>
     <addaction name="actionTraffic_Light"/>
+    <addaction name="actionRefuge"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAdd"/>
@@ -300,6 +301,11 @@
   <action name="actionTraffic_Light">
    <property name="text">
     <string>Traffic Light</string>
+   </property>
+  </action>
+  <action name="actionRefuge">
+   <property name="text">
+    <string>Refuge</string>
    </property>
   </action>
  </widget>

@@ -12,3 +12,9 @@ CarOption::~CarOption()
 {
     delete ui;
 }
+
+void CarOption::on_pushButton_clicked()
+{
+    delete selectedCarSpawn;
+    emit pressDelete();
+}

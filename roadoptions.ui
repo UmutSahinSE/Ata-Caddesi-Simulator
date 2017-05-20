@@ -15,13 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="CurveButton">
-     <property name="text">
-      <string>Curve</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QPushButton" name="FlowNorth">
@@ -52,13 +45,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QPushButton" name="ChangeFlowButton">
-     <property name="text">
-      <string>Change Color</string>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="ExtendCutButton">

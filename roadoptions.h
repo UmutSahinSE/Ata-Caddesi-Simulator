@@ -33,8 +33,12 @@ private slots:
 
     void on_ReplaceButton_clicked();
 
+    void on_DeleteButton_clicked();
+
 private:
     Ui::Roadoptions *ui;
+signals:
+    void pressDelete();
 };
 
 #endif // ROADOPTIONS_H

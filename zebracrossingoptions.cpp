@@ -12,3 +12,9 @@ ZebraCrossingOptions::~ZebraCrossingOptions()
 {
     delete ui;
 }
+
+void ZebraCrossingOptions::on_DeleteButton_clicked()
+{
+    delete selectedZebraCrossing;
+    emit pressDelete();
+}

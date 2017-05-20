@@ -12,3 +12,9 @@ IntersectionOptions::~IntersectionOptions()
 {
     delete ui;
 }
+
+void IntersectionOptions::on_DeleteButton_clicked()
+{
+    delete selectedIntersection;
+    emit pressDelete();
+}

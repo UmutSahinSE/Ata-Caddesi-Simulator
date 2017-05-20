@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "endoftheroad.h"
 
+
 namespace Ui {
 class EndOfTheRoadOptions;
 }
@@ -17,8 +18,13 @@ public:
     explicit EndOfTheRoadOptions(QWidget *parent = 0);
     ~EndOfTheRoadOptions();
 
+private slots:
+    void on_DeleteButton_clicked();
+
 private:
     Ui::EndOfTheRoadOptions *ui;
+signals:
+    void pressDelete();
 };
 
 #endif // ENDOFTHEROADOPTIONS_H

@@ -8,7 +8,6 @@ class refuge : public QLabel
 {
 public:
     refuge();
-    QLine *refugeLine;
 private:
 
     QPixmap *refugeImage;

@@ -12,3 +12,9 @@ TrafficLightOptions::~TrafficLightOptions()
 {
     delete ui;
 }
+
+void TrafficLightOptions::on_DeleteButton_clicked()
+{
+    delete selectedTrafficLight;
+    emit pressDelete();
+}

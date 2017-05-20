@@ -41,7 +41,10 @@ SOURCES += main.cpp\
     zebracrossing.cpp \
     endoftheroad.cpp \
     sign.cpp \
-    trafficlight.cpp
+    trafficlight.cpp \
+    squareoptions.cpp \
+    empty.cpp \
+    refugeoptions.cpp
 
 HEADERS  += \
     endoftheroadoptions.h \
@@ -62,7 +65,10 @@ HEADERS  += \
     endoftheroad.h \
     sign.h \
     trafficlight.h \
-    ui_mainwindow.h
+    ui_mainwindow.h \
+    squareoptions.h \
+    empty.h \
+    refugeoptions.h
 
 FORMS    += \
     endoftheroadoptions.ui \
@@ -72,7 +78,10 @@ FORMS    += \
     caroption.ui \
     mainwindow.ui \
     zebracrossingoptions.ui \
-    roadoptions.ui
+    roadoptions.ui \
+    squareoptions.ui \
+    empty.ui \
+    refugeoptions.ui
 
 
 STATECHARTS += \
@@ -80,7 +89,11 @@ STATECHARTS += \
 
 DISTFILES += \
     README.md \
-    RedLight.png
+    RedLight.png \
+    30mph-speed-limit-sign.jpg \
+    60 speed sign.jpg \
+    90 sign.png \
+    120 sign.png
 
 RESOURCES += \
     resources.qrc

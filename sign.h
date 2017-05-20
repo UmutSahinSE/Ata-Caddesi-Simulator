@@ -9,6 +9,8 @@
 class sign : public QLabel
 {
 public:
+    bool isStop;
+    int SpeedLimit;
     sign();
 private:
     QRect *signRect;

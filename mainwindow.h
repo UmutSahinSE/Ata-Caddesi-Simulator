@@ -30,12 +30,12 @@ private slots:
     void AddTrafficLight();
     void AddSign();
     void AddSquare();
-    void ReplaceRoad(QLabel *ChoosenRoad);
-    void ChooseRoad();
+    void ReplaceRoad();
+    void AddRefuge();
 
-    void FrameItemOnHover();
     void ChooseClickedItem();
     void disconnectMouseEvents();
+    void ResetOptionScreen();
 
     void on_actionOne_Way_triggered();
 
@@ -60,6 +60,8 @@ private slots:
     void on_actionSquare_triggered();
 
     void on_actionNew_triggered();
+
+    void on_actionRefuge_triggered();
 
 private:
     Ui::MainWindow *ui;

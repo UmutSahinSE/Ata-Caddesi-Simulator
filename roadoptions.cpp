@@ -35,5 +35,11 @@ void Roadoptions::on_FlowNorth_clicked()
 
 void Roadoptions::on_ReplaceButton_clicked()
 {
-    connect(buildLabel, SIGNAL(MousePressed()),tempMW,SLOT(ChooseRoad()));
+    connect(buildLabel, SIGNAL(MousePressed()),tempMW,SLOT(ReplaceRoad()));
+}
+
+void Roadoptions::on_DeleteButton_clicked()
+{
+    delete selectedOneWayRoad;
+    emit pressDelete();
 }

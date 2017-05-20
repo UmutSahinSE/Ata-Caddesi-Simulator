@@ -13,5 +13,9 @@
         <file>Square.jpg</file>
         <file>Green Light.png</file>
         <file>RedLight.png</file>
+        <file>30mph-speed-limit-sign.jpg</file>
+        <file>60 speed sign.jpg</file>
+        <file>90 sign.png</file>
+        <file>120 sign.png</file>
     </qresource>
 </RCC>

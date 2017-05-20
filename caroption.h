@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "carspawn.h"
 
+
 namespace Ui {
 class CarOption;
 }
@@ -17,8 +18,14 @@ public:
     explicit CarOption(QWidget *parent = 0);
     ~CarOption();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::CarOption *ui;
+signals:
+    void pressDelete();
+
 };
 
 #endif // CAROPTION_H
