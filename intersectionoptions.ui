@@ -15,20 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="text">
-      <string>Rotate</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="ReplaceButton">
-     <property name="text">
-      <string>Replace</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QPushButton" name="DeleteButton">
      <property name="text">
       <string>Delete</string>

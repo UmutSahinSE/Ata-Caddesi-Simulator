@@ -17,14 +17,18 @@
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="Pedestrianlabel">
-       <property name="text">
-        <string>Pedestrian per Minute</string>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="PedestrianEdit"/>
+      <widget class="QLabel" name="Pedestrianlabel">
+       <property name="text">
+        <string>30</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

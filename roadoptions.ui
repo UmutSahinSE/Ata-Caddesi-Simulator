@@ -47,11 +47,29 @@
     </layout>
    </item>
    <item>
-    <widget class="QPushButton" name="ExtendCutButton">
-     <property name="text">
-      <string>Extend/Shorten</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Length</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="LengthLabel">
+       <property name="text">
+        <string>200</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QPushButton" name="ReplaceButton">

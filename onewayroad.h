@@ -15,6 +15,7 @@ public:
     void rotateEast();
     void rotateWest();
     int roadAngle;
+    int Length;
     QLine *roadLine;
 private:
 

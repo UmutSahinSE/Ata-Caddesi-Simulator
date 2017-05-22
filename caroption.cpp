@@ -18,3 +18,10 @@ void CarOption::on_pushButton_clicked()
     delete selectedCarSpawn;
     emit pressDelete();
 }
+
+void CarOption::on_horizontalSlider_valueChanged(int value)
+{
+    value=value*6/10;
+    selectedCarSpawn->carsPerMinute=value;
+    ui->CarsPerMinuteLabel->setText(QString::number(value));
+}

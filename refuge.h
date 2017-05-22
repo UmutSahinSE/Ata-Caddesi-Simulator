@@ -8,6 +8,8 @@ class refuge : public QLabel
 {
 public:
     refuge();
+    bool isVerticle;
+    int length;
 private:
 
     QPixmap *refugeImage;

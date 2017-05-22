@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>133</width>
+    <width>178</width>
     <height>253</height>
    </rect>
   </property>
@@ -24,7 +24,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="RedDurationEdit"/>
+      <widget class="QSlider" name="RedSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="RedNum">
+       <property name="text">
+        <string>60</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -38,7 +49,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="GreenDurationEdit"/>
+      <widget class="QSlider" name="GreenSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="GreenNum">
+       <property name="text">
+        <string>60</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -52,7 +74,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="StartFromEdit"/>
+      <widget class="QSlider" name="StartSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="StartNum">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

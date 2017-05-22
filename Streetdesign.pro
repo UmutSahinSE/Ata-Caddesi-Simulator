@@ -44,7 +44,10 @@ SOURCES += main.cpp\
     trafficlight.cpp \
     squareoptions.cpp \
     empty.cpp \
-    refugeoptions.cpp
+    refugeoptions.cpp \
+    simulationresults.cpp \
+    car.cpp \
+    spawnthread.cpp
 
 HEADERS  += \
     endoftheroadoptions.h \
@@ -65,10 +68,12 @@ HEADERS  += \
     endoftheroad.h \
     sign.h \
     trafficlight.h \
-    ui_mainwindow.h \
     squareoptions.h \
     empty.h \
-    refugeoptions.h
+    refugeoptions.h \
+    simulationresults.h \
+    car.h \
+    spawnthread.h
 
 FORMS    += \
     endoftheroadoptions.ui \
@@ -81,19 +86,16 @@ FORMS    += \
     roadoptions.ui \
     squareoptions.ui \
     empty.ui \
-    refugeoptions.ui
+    refugeoptions.ui \
+    simulationresults.ui
 
 
 STATECHARTS += \
-    Simulation_Screen.scxml
+
 
 DISTFILES += \
     README.md \
-    RedLight.png \
-    30mph-speed-limit-sign.jpg \
-    60 speed sign.jpg \
-    90 sign.png \
-    120 sign.png
+
 
 RESOURCES += \
     resources.qrc

@@ -7,6 +7,7 @@ zebracrossing::zebracrossing()
     this->setGeometry(100,100,40,20);
     zebraImage=new QPixmap(":/pictures/zebracrossing.png");
     setPixmap((*zebraImage).scaled(40,20));
+    PedestrianPerMinute=30;
 
 }
 

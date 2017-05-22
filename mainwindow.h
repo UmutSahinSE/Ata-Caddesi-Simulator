@@ -16,7 +16,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+signals:
+    void Simulate();
 private slots:
 
 
@@ -31,7 +32,9 @@ private slots:
     void AddSign();
     void AddSquare();
     void ReplaceRoad();
+    void ReplaceRefuge();
     void AddRefuge();
+    void AppointRoad();
 
     void ChooseClickedItem();
     void disconnectMouseEvents();
@@ -63,7 +66,10 @@ private slots:
 
     void on_actionRefuge_triggered();
 
+    void on_SimulateButton_clicked();
+
 private:
+
     Ui::MainWindow *ui;
 
 

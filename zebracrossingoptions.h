@@ -22,6 +22,8 @@ public:
 private slots:
     void on_DeleteButton_clicked();
 
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     Ui::ZebraCrossingOptions *ui;
 signals:

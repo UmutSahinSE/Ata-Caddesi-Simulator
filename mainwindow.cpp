@@ -20,8 +20,8 @@
 #include "square.h"
 #include "squareoptions.h"
 #include "empty.h"
-
-
+#include "simulationresults.h"
+#include "spawnthread.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -93,6 +93,14 @@ void MainWindow::AddOneWayRoad()
     oneway->roadLine->setLine(oneway->x()+20,oneway->y()+200,oneway->x()+20,oneway->y());
     ui->buildLabel->raise();
     oneway->show();
+    Roadoptions *newtab=new Roadoptions;
+    QString tabname("Road Options");
+    ui->OptionScreen->addTab(newtab,tabname);
+    newtab->selectedOneWayRoad=oneway;
+    newtab->buildLabel=ui->buildLabel;
+    newtab->tempMW=this;
+    connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+    ui->OptionScreen->removeTab(0);
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddOneWayRoad()));
 }
 
@@ -177,6 +185,12 @@ void MainWindow::AddIntersection()
     }
     intersect->stackUnder(ui->buildLabel);
     intersect->show();
+    IntersectionOptions *newtab=new IntersectionOptions;
+    QString tabname("Intersection Options");
+    ui->OptionScreen->addTab(newtab,tabname);
+    newtab->selectedIntersection=intersect;
+    connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+    ui->OptionScreen->removeTab(0);
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddIntersection()));
 }
 
@@ -196,6 +210,14 @@ void MainWindow::AddZebraCrossing()
             crossing->setGeometry(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->mouselocation.y()-10,40,20);
             ui->buildLabel->raise();
             crossing->show();
+
+            ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+            QString tabname("Zebra Crossing Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedZebraCrossing=crossing;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
+
             if(ui->buildLabel->childAt(crossing->x()-1,crossing->y())&&ui->buildLabel->childAt(crossing->x()-1,crossing->y())->accessibleDescription()=="refuge"&&ui->buildLabel->childAt(crossing->x()-21,crossing->y())->accessibleDescription()=="onewayroad")
             {
                 zebracrossing *crossing2=new zebracrossing;
@@ -203,6 +225,12 @@ void MainWindow::AddZebraCrossing()
                 crossing2->setGeometry(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-60,ui->buildLabel->mouselocation.y()-10,40,20);
                 ui->buildLabel->raise();
                 crossing2->show();
+                ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+                QString tabname("Zebra Crossing Options");
+                ui->OptionScreen->addTab(newtab,tabname);
+                newtab->selectedZebraCrossing=crossing2;
+                connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+                ui->OptionScreen->removeTab(0);
             }
             if(ui->buildLabel->childAt(crossing->x()+41,crossing->y())&&ui->buildLabel->childAt(crossing->x()+41,crossing->y())->accessibleDescription()=="refuge"&&ui->buildLabel->childAt(crossing->x()+61,crossing->y())->accessibleDescription()=="onewayroad")
             {
@@ -211,6 +239,12 @@ void MainWindow::AddZebraCrossing()
                 crossing3->setGeometry(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+60,ui->buildLabel->mouselocation.y()-10,40,20);
                 ui->buildLabel->raise();
                 crossing3->show();
+                ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+                QString tabname("Zebra Crossing Options");
+                ui->OptionScreen->addTab(newtab,tabname);
+                newtab->selectedZebraCrossing=crossing3;
+                connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+                ui->OptionScreen->removeTab(0);
             }
         }
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0||static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
@@ -221,6 +255,12 @@ void MainWindow::AddZebraCrossing()
             crossing->rotate();
             ui->buildLabel->raise();
             crossing->show();
+            ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+            QString tabname("Zebra Crossing Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedZebraCrossing=crossing;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
             if(ui->buildLabel->childAt(crossing->x(),crossing->y()-1)&&ui->buildLabel->childAt(crossing->x(),crossing->y()-1)->accessibleDescription()=="refuge"&&ui->buildLabel->childAt(crossing->x(),crossing->y()-21)->accessibleDescription()=="onewayroad")
             {
                 zebracrossing *crossing2=new zebracrossing;
@@ -229,6 +269,12 @@ void MainWindow::AddZebraCrossing()
                 crossing2->rotate();
                 ui->buildLabel->raise();
                 crossing2->show();
+                ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+                QString tabname("Zebra Crossing Options");
+                ui->OptionScreen->addTab(newtab,tabname);
+                newtab->selectedZebraCrossing=crossing2;
+                connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+                ui->OptionScreen->removeTab(0);
             }
             if(ui->buildLabel->childAt(crossing->x()+41,crossing->y())&&ui->buildLabel->childAt(crossing->x()+41,crossing->y())->accessibleDescription()=="refuge"&&ui->buildLabel->childAt(crossing->x()+61,crossing->y())->accessibleDescription()=="onewayroad")
             {
@@ -238,6 +284,12 @@ void MainWindow::AddZebraCrossing()
                 crossing3->rotate();
                 ui->buildLabel->raise();
                 crossing3->show();
+                ZebraCrossingOptions *newtab=new ZebraCrossingOptions;
+                QString tabname("Zebra Crossing Options");
+                ui->OptionScreen->addTab(newtab,tabname);
+                newtab->selectedZebraCrossing=crossing3;
+                connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+                ui->OptionScreen->removeTab(0);
             }
         }
     }
@@ -261,6 +313,12 @@ void MainWindow::AddEndOfTheRoad()
             end->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x2()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y2(),40,10);
             ui->buildLabel->raise();
             end->show();
+            EndOfTheRoadOptions *newtab=new EndOfTheRoadOptions;
+            QString tabname("End of the Road Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedEndOfTheRoad=end;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
 
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
@@ -270,6 +328,12 @@ void MainWindow::AddEndOfTheRoad()
             end->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x2()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y2()-10,40,10);
             ui->buildLabel->raise();
             end->show();
+            EndOfTheRoadOptions *newtab=new EndOfTheRoadOptions;
+            QString tabname("End of the Road Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedEndOfTheRoad=end;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
 
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
@@ -280,6 +344,12 @@ void MainWindow::AddEndOfTheRoad()
             end->rotate();
             ui->buildLabel->raise();
             end->show();
+            EndOfTheRoadOptions *newtab=new EndOfTheRoadOptions;
+            QString tabname("End of the Road Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedEndOfTheRoad=end;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
         {
@@ -289,6 +359,12 @@ void MainWindow::AddEndOfTheRoad()
             end->rotate();
             ui->buildLabel->raise();
             end->show();
+            EndOfTheRoadOptions *newtab=new EndOfTheRoadOptions;
+            QString tabname("End of the Road Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedEndOfTheRoad=end;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
     }
 
@@ -310,16 +386,42 @@ void MainWindow::AddCarSpawn()
             spawn->setParent(ui->buildLabel);
             spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1(),40,10);
             ui->buildLabel->raise();
+            SpawnThread *theSpawnThread=new SpawnThread;
+            spawn->tempMw=this;
+            spawn->buildLabel=ui->buildLabel;
+            connect(this,SIGNAL(Simulate()),theSpawnThread,SLOT(startFunction()));
+            spawn->onRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(spawn->x()+20,spawn->y()-40));
+            spawn->SetupThread(theSpawnThread);
             spawn->show();
+            CarOption *newtab=new CarOption;
+            QString tabname("Car Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedCarSpawn=spawn;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
+
         }
 
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
         {
             carspawn *spawn=new carspawn;
+
             spawn->setParent(ui->buildLabel);
             spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1()-20,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1()-10,40,10);
             ui->buildLabel->raise();
+            SpawnThread *theSpawnThread=new SpawnThread;
+            spawn->tempMw=this;
+            spawn->buildLabel=ui->buildLabel;
+            connect(this,SIGNAL(Simulate()),theSpawnThread,SLOT(startFunction()));
+            spawn->onRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(spawn->x()+20,spawn->y()-40));
+            spawn->SetupThread(theSpawnThread);
             spawn->show();
+            CarOption *newtab=new CarOption;
+            QString tabname("Car Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedCarSpawn=spawn;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
 
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
@@ -328,8 +430,20 @@ void MainWindow::AddCarSpawn()
             spawn->setParent(ui->buildLabel);
             spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1()-10,static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1()-20,40,10);
             spawn->rotate();
+            SpawnThread *theSpawnThread=new SpawnThread;
+            spawn->tempMw=this;
+            spawn->buildLabel=ui->buildLabel;
+            connect(this,SIGNAL(Simulate()),theSpawnThread,SLOT(startFunction()));
+            spawn->onRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(spawn->x()+20,spawn->y()-40));
+            spawn->SetupThread(theSpawnThread);
             ui->buildLabel->raise();
             spawn->show();
+            CarOption *newtab=new CarOption;
+            QString tabname("Car Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedCarSpawn=spawn;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
         else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
         {
@@ -337,10 +451,24 @@ void MainWindow::AddCarSpawn()
             spawn->setParent(ui->buildLabel);
             spawn->setGeometry(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->x1(),static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadLine->y1()-20,40,10);
             spawn->rotate();
+            SpawnThread *theSpawnThread=new SpawnThread;
+            spawn->tempMw=this;
+            spawn->buildLabel=ui->buildLabel;
+            connect(this,SIGNAL(Simulate()),theSpawnThread,SLOT(startFunction()));
+            spawn->onRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(spawn->x()+20,spawn->y()-40));
+            spawn->SetupThread(theSpawnThread);
             ui->buildLabel->raise();
             spawn->show();
+            CarOption *newtab=new CarOption;
+            QString tabname("Car Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedCarSpawn=spawn;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
         }
     }
+
+
 
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddCarSpawn()));
 }
@@ -376,6 +504,15 @@ void MainWindow::AddTrafficLight()
         }
         ui->buildLabel->raise();
         light->show();
+
+        TrafficLightOptions *newtab=new TrafficLightOptions;
+        QString tabname("Traffic Light Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedTrafficLight=light;
+        newtab->buildLabel=ui->buildLabel;
+        newtab->tempMW=this;
+        connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+        ui->OptionScreen->removeTab(0);
     }
 
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddTrafficLight()));
@@ -385,7 +522,7 @@ void MainWindow::AddSign()
 {
     if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
     {
-        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddCarSpawn()));
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AddSign()));
         return;
     }
     if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
@@ -412,6 +549,13 @@ void MainWindow::AddSign()
         }
         ui->buildLabel->raise();
         newsign->show();
+
+        SignOptions *newtab=new SignOptions;
+        QString tabname("Sign Options");
+        ui->OptionScreen->addTab(newtab,tabname);
+        newtab->selectedSign=newsign;
+        connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+        ui->OptionScreen->removeTab(0);
     }
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddSign()));
 }
@@ -423,6 +567,12 @@ void MainWindow::AddSquare()
     circle->setGeometry(ui->buildLabel->mouselocation.x()-80, ui->buildLabel->mouselocation.y()-80,160,160);
     ui->buildLabel->raise();
     circle->show();
+    squareOptions *newtab=new squareOptions;
+    QString tabname("Square Options");
+    ui->OptionScreen->addTab(newtab,tabname);
+    newtab->selectedSquare=circle;
+    connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+    ui->OptionScreen->removeTab(0);
     disconnect(ui->buildLabel, SIGNAL(MousePressed()), this, SLOT(AddSquare()));
 }
 
@@ -443,19 +593,19 @@ void MainWindow::ReplaceRoad()
                 if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40<=ui->buildLabel->mouselocation.y()) //if lower half is clicked
                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+80);
                 else //if upper half is clicked
-                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
+                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
             }
             else if(choosenRoad->roadAngle==180)
             {
                 if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40>=ui->buildLabel->mouselocation.x()) //if lower half is clicked
-                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
+                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
                 else //if upper half is clicked
                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+80,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
             }
             else if(choosenRoad->roadAngle==0)
             {
                 if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40>=ui->buildLabel->mouselocation.x()) //if lower half is clicked
-                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40);
+                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40);
                 else //if upper half is clicked
                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+80,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40);
             }
@@ -473,16 +623,16 @@ void MainWindow::ReplaceRoad()
             if(choosenRoad->roadAngle==90||choosenRoad->roadAngle==270)
             {
                 if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+80<=ui->buildLabel->mouselocation.y()) //if lower half is clicked
-                choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+160);
+                choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+choosenRoad->Length-40);
                 else //if upper half is clicked
-                choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
+                choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
             }
             else if(choosenRoad->roadAngle==0||choosenRoad->roadAngle==180)
             {
                 if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+80>=ui->buildLabel->mouselocation.x()) //if lower half is clicked
-                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->mouselocation.y()-20);
+                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->mouselocation.y()-20);
                 else //if upper half is clicked
-                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+160,ui->buildLabel->mouselocation.y()-20);
+                choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+choosenRoad->Length-40,ui->buildLabel->mouselocation.y()-20);
             }
 
         }
@@ -492,23 +642,23 @@ void MainWindow::ReplaceRoad()
            {
               if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
               {
-                 choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
-                 if(ui->buildLabel->mouselocation.x()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+160) //if tip of road is clicked(40 pixel)
+                 choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
+                 if(ui->buildLabel->mouselocation.x()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+choosenRoad->Length-40) //if tip of road is clicked(40 pixel)
                  {
-                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+160,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
+                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+choosenRoad->Length-40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
                  }
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
               {
-                 choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
+                 choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
                  if(ui->buildLabel->mouselocation.x()<=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40) //if tip of road is clicked(40 pixel)
                  {
-                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
+                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
                  }
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
               {
-                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-200);
+                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-choosenRoad->Length);
               }
               else
               {
@@ -520,9 +670,9 @@ void MainWindow::ReplaceRoad()
               if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
               {
                  choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40);
-                 if(ui->buildLabel->mouselocation.x()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+160) //if tip of road is clicked(40 pixel)
+                 if(ui->buildLabel->mouselocation.x()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+choosenRoad->Length-40) //if tip of road is clicked(40 pixel)
                  {
-                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+160,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40);
+                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+choosenRoad->Length-40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40);
                  }
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
@@ -535,7 +685,7 @@ void MainWindow::ReplaceRoad()
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
               {
-                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+200);
+                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+choosenRoad->Length);
               }
               else
               {
@@ -555,14 +705,14 @@ void MainWindow::ReplaceRoad()
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
               {
                   choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->mouselocation.y()-20);
-                  if(ui->buildLabel->mouselocation.y()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+160) //if tip of road is clicked(40 pixel)
+                  if(ui->buildLabel->mouselocation.y()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+choosenRoad->Length-40) //if tip of road is clicked(40 pixel)
                   {
-                        choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+160);
+                        choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+choosenRoad->Length-40);
                   }
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0)
               {
-                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+200,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
+                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+choosenRoad->Length,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
               }
               else
               {
@@ -573,23 +723,23 @@ void MainWindow::ReplaceRoad()
            {
               if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==90)
               {
-                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->mouselocation.y()-20);
+                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->mouselocation.y()-20);
                  if(ui->buildLabel->mouselocation.y()<=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+40) //if tip of road is clicked(40 pixel)
                  {
-                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
+                       choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
                  }
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==270)
               {
-                  choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->mouselocation.y()-20);
-                  if(ui->buildLabel->mouselocation.y()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+160) //if tip of road is clicked(40 pixel)
+                  choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->mouselocation.y()-20);
+                  if(ui->buildLabel->mouselocation.y()>=ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+choosenRoad->Length-40) //if tip of road is clicked(40 pixel)
                   {
-                        choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+160);
+                        choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()+choosenRoad->Length-40);
                   }
               }
               else if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
               {
-                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-200,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
+                 choosenRoad->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()-choosenRoad->Length,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
               }
               else
               {
@@ -600,24 +750,114 @@ void MainWindow::ReplaceRoad()
     }
     else
     {
-        choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->mouselocation.y()-100);
+        choosenRoad->move(ui->buildLabel->mouselocation.x()-20,ui->buildLabel->mouselocation.y()-choosenRoad->Length/2);
         if(choosenRoad->roadAngle==0||choosenRoad->roadAngle==180)
-        choosenRoad->move(ui->buildLabel->mouselocation.x()-100,ui->buildLabel->mouselocation.y()-20);
+        choosenRoad->move(ui->buildLabel->mouselocation.x()-choosenRoad->Length/2,ui->buildLabel->mouselocation.y()-20);
     }
-    choosenRoad->roadLine->setLine(choosenRoad->x()+20,choosenRoad->y()+200,choosenRoad->x()+20,choosenRoad->y());
+    choosenRoad->roadLine->setLine(choosenRoad->x()+20,choosenRoad->y()+choosenRoad->Length,choosenRoad->x()+20,choosenRoad->y());
     ui->buildLabel->raise();
     choosenRoad->show();
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(ReplaceRoad()));
 }
 
+void MainWindow::ReplaceRefuge()
+{
+     refuge *chosenRefuge=static_cast<RefugeOptions *>(ui->OptionScreen->currentWidget())->selectedRefuge;
+     if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)&&ui->buildLabel->childAt(ui->buildLabel->mouselocation)!=static_cast<QLabel *>(chosenRefuge))
+     {
+         if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0||static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+         {
+              chosenRefuge->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-20);
+         }
+         else
+         {
+               chosenRefuge->move(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y());
+         }
+     }
+     else
+     {
+         chosenRefuge->move(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-chosenRefuge->length/2);
+         if(!chosenRefuge->isVerticle)
+         chosenRefuge->move(ui->buildLabel->mouselocation.x()-chosenRefuge->length/2,ui->buildLabel->mouselocation.y()-10);
+     }
+     ui->buildLabel->raise();
+     chosenRefuge->show();
+     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(ReplaceRefuge()));
+}
+
 void MainWindow::AddRefuge()
 {
-    refuge *refugePtr=new refuge;
-    refugePtr->setParent(ui->buildLabel);
-    refugePtr->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-100,20,200);
-    ui->buildLabel->raise();
-    refugePtr->show();
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+       refuge *refugePtr=new refuge;
+       refugePtr->setParent(ui->buildLabel);
+       refugePtr->setGeometry(ui->buildLabel->mouselocation.x()-10,ui->buildLabel->mouselocation.y()-100,20,200);
+       ui->buildLabel->raise();
+       refugePtr->show();
+       RefugeOptions *newtab=new RefugeOptions;
+       QString tabname("Refuge Options");
+       ui->OptionScreen->addTab(newtab,tabname);
+       newtab->selectedRefuge=refugePtr;
+       newtab->tempMW=this;
+       newtab->buildLabel=ui->buildLabel;
+       connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+       ui->OptionScreen->removeTab(0);
+       disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddRefuge()));
+       return;
+    }
+    else if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        if(static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==0||static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation))->roadAngle==180)
+        {
+            refuge *refugePtr=new refuge;
+            refugePtr->setParent(ui->buildLabel);
+            refugePtr->setGeometry(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x(),ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y()-20,200,20);
+            ui->buildLabel->raise();
+            refugePtr->show();
+            refugePtr->isVerticle=false;
+            RefugeOptions *newtab=new RefugeOptions;
+            QString tabname("Refuge Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedRefuge=refugePtr;
+            newtab->tempMW=this;
+            newtab->buildLabel=ui->buildLabel;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
+        }
+        else
+        {
+            refuge *refugePtr=new refuge;
+            refugePtr->setParent(ui->buildLabel);
+            refugePtr->setGeometry(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->x()+40,ui->buildLabel->childAt(ui->buildLabel->mouselocation)->y(),20,200);
+            ui->buildLabel->raise();
+            refugePtr->show();
+            RefugeOptions *newtab=new RefugeOptions;
+            QString tabname("Refuge Options");
+            ui->OptionScreen->addTab(newtab,tabname);
+            newtab->selectedRefuge=refugePtr;
+            newtab->tempMW=this;
+            newtab->buildLabel=ui->buildLabel;
+            connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
+            ui->OptionScreen->removeTab(0);
+        }
+
+    }
     disconnect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddRefuge()));
+
+}
+
+void MainWindow::AppointRoad()
+{
+    if(!ui->buildLabel->childAt(ui->buildLabel->mouselocation))
+    {
+        disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AppointRoad()));
+        return;
+    }
+    if(ui->buildLabel->childAt(ui->buildLabel->mouselocation)->accessibleDescription()=="onewayroad")
+    {
+        static_cast<TrafficLightOptions *>(ui->OptionScreen->currentWidget())->selectedTrafficLight->appointedRoad=static_cast<onewayroad *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+    }
+    disconnect(ui->buildLabel,SIGNAL(MousePressed()),this,SLOT(AppointRoad()));
 }
 
 
@@ -678,6 +918,8 @@ void MainWindow::ChooseClickedItem()
         QString tabname("Traffic Light Options");
         ui->OptionScreen->addTab(newtab,tabname);
         newtab->selectedTrafficLight=static_cast<trafficlight *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        newtab->buildLabel=ui->buildLabel;
+        newtab->tempMW=this;
         connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
         ui->OptionScreen->removeTab(0);
     }
@@ -718,6 +960,8 @@ void MainWindow::ChooseClickedItem()
         QString tabname("Refuge Options");
         ui->OptionScreen->addTab(newtab,tabname);
         newtab->selectedRefuge=static_cast<refuge *>(ui->buildLabel->childAt(ui->buildLabel->mouselocation));
+        newtab->tempMW=this;
+        newtab->buildLabel=ui->buildLabel;
         connect(newtab, SIGNAL(pressDelete()),this, SLOT(ResetOptionScreen()));
         ui->OptionScreen->removeTab(0);
     }
@@ -826,4 +1070,12 @@ void MainWindow::on_actionRefuge_triggered()
 {
     disconnectMouseEvents();
     connect(ui->buildLabel, SIGNAL(MousePressed()),this, SLOT(AddRefuge()));
+}
+void MainWindow::on_SimulateButton_clicked()
+{
+    SimulationResults *Results=new SimulationResults;
+    ui->OptionScreen->removeTab(0);
+    ui->OptionScreen->addTab(Results,"SimulatonResults");
+
+    emit Simulate();
 }

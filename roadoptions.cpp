@@ -43,3 +43,43 @@ void Roadoptions::on_DeleteButton_clicked()
     delete selectedOneWayRoad;
     emit pressDelete();
 }
+
+void Roadoptions::on_horizontalSlider_valueChanged(int value)
+{
+    value=value*20+80;
+    if(selectedOneWayRoad->roadAngle==90)
+    {
+        selectedOneWayRoad->resize(40,value);
+        QPixmap road(":/pictures/One Way Road.png");
+        selectedOneWayRoad->setPixmap(road.scaled(40,value));
+        selectedOneWayRoad->Length=value;
+    }
+    else if(selectedOneWayRoad->roadAngle==270)
+    {
+        selectedOneWayRoad->resize(40,value);
+        QPixmap road(":/pictures/One Way Road.png");
+        QTransform rotatePix;
+        QPixmap newpix(road.transformed(rotatePix.rotate(180)));
+        selectedOneWayRoad->setPixmap(newpix.scaled(40,value));
+        selectedOneWayRoad->Length=value;
+    }
+    else if(selectedOneWayRoad->roadAngle==180)
+    {
+        selectedOneWayRoad->resize(value,40);
+        QPixmap road(":/pictures/One Way Road.png");
+        QTransform rotatePix;
+        QPixmap newpix(road.transformed(rotatePix.rotate(270)));
+        selectedOneWayRoad->setPixmap(newpix.scaled(value,40));
+         selectedOneWayRoad->Length=value;
+    }
+    else if(selectedOneWayRoad->roadAngle==0)
+    {
+        selectedOneWayRoad->resize(value,40);
+        QPixmap road(":/pictures/One Way Road.png");
+        QTransform rotatePix;
+        QPixmap newpix(road.transformed(rotatePix.rotate(90)));
+        selectedOneWayRoad->setPixmap(newpix.scaled(value,40));
+         selectedOneWayRoad->Length=value;
+    }
+    ui->LengthLabel->setText(QString::number(value));
+}

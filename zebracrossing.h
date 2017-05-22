@@ -12,6 +12,7 @@ public:
     void rotate();
     bool isVerticle;
     QPixmap *zebraImage;
+    int PedestrianPerMinute;
 };
 
 #endif // ZEBRACROSSING_H
