@@ -31,7 +31,7 @@ void onewayroad::rotateNorth()
         roadLine->setLine(this->x()+20, this->y()+Length, this->x()+20, this->y());
         QTransform rotatePix;
         QPixmap newpix(blueRoadImage->transformed(rotatePix.rotate(0)));
-        setPixmap(newpix.scaled(40,200));
+        setPixmap(newpix.scaled(40,Length));
         return;
     }
     if(roadAngle==270)
